@@ -14,7 +14,7 @@ type jsonResponse struct {
 	Data    any `json:"data,omitempty"`
 }
 
-func Index(w http.ResponseWriter, r *http.Request) {
+func Index(w http.ResponseWriter, _ *http.Request) {
 	payload := jsonResponse{
 		Error:   false,
 		Message: "Welcome to GoUber",
