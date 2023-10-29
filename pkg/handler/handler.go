@@ -72,3 +72,15 @@ func errorJson(w http.ResponseWriter, err error, status ...int) {
 		log.Panic(err)
 	}
 }
+
+func payloadGenerator(err bool, message string, data ...any) jsonResponse {
+	var payload jsonResponse
+	payload.Error = err
+	payload.Message = message
+
+	if len(data) > 0 {
+		payload.Data = data[0]
+	}
+
+	return payload
+}
