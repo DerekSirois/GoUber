@@ -1,4 +1,4 @@
-package db
+package storage
 
 var schema = `
 CREATE TABLE if not exists roles(

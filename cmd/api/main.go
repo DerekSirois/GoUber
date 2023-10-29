@@ -1,7 +1,7 @@
 package main
 
 import (
-	"GoUber/pkg/db"
+	"GoUber/pkg/storage"
 	"log"
 	"net/http"
 )
@@ -12,7 +12,7 @@ func main() {
 		Handler: routes(),
 	}
 
-	err := db.InitDb()
+	err := storage.InitDb()
 	if err != nil {
 		log.Panic(err)
 	}
