@@ -22,7 +22,7 @@ func Index(w http.ResponseWriter, _ *http.Request) {
 
 	err := writeJson(w, payload, http.StatusOK)
 	if err != nil {
-		errorJson(w, err, http.StatusInternalServerError)
+		ErrorJson(w, err, http.StatusInternalServerError)
 	}
 }
 
@@ -56,7 +56,7 @@ func writeJson(w http.ResponseWriter, data any, status int, headers ...http.Head
 	return nil
 }
 
-func errorJson(w http.ResponseWriter, err error, status ...int) {
+func ErrorJson(w http.ResponseWriter, err error, status ...int) {
 	statusCode := http.StatusBadRequest
 
 	if len(status) > 0 {
