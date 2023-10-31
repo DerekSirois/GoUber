@@ -11,7 +11,8 @@ import (
 type jsonResponse struct {
 	Error   bool
 	Message string
-	Data    any `json:"data,omitempty"`
+	Data    any    `json:"data,omitempty"`
+	Token   string `json:"token,omitempty"`
 }
 
 func Index(w http.ResponseWriter, _ *http.Request) {
