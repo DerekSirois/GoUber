@@ -13,3 +13,15 @@ func GetByEmailDB(email string) (*User, error) {
 	err := storage.Db.Get(u, "SELECT * FROM users WHERE email = $1", email)
 	return u, err
 }
+
+func GetByIdDB(id int) (*User, error) {
+	u := &User{}
+	err := storage.Db.Get(u, "SELECT * FROM users WHERE id = $1", id)
+	return u, err
+}
+
+func GetAllDriversDB() ([]*User, error) {
+	u := make([]*User, 0)
+	err := storage.Db.Select(&u, "SELECT u.* FROM users u JOIN roles r ON u.role_id = r.id  WHERE r.name = 'Driver' and u.active = true")
+	return u, err
+}

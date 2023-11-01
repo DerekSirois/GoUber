@@ -20,12 +20,7 @@ func Register(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	payload := jsonResponse{
-		Error:   false,
-		Message: "User created successfully",
-	}
-
-	err = writeJson(w, payload, http.StatusOK)
+	err = writeJson(w, payloadGenerator(false, "User created successfully"), http.StatusOK)
 	if err != nil {
 		ErrorJson(w, err, http.StatusInternalServerError)
 		return
@@ -57,13 +52,21 @@ func Login(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	payload := jsonResponse{
-		Error:   false,
-		Message: "You are logged in",
-		Token:   token,
+	err = writeJson(w, payloadGenerator(false, "You are logged in", token), http.StatusOK)
+	if err != nil {
+		ErrorJson(w, err, http.StatusInternalServerError)
+		return
+	}
+}
+
+func GetClosestDriver(w http.ResponseWriter, r *http.Request) {
+	d, err := user.GetClosestDriverService(r)
+	if err != nil {
+		ErrorJson(w, err, http.StatusInternalServerError)
+		return
 	}
 
-	err = writeJson(w, payload, http.StatusOK)
+	err = writeJson(w, payloadGenerator(false, "Get closest driver", d), http.StatusOK)
 	if err != nil {
 		ErrorJson(w, err, http.StatusInternalServerError)
 		return
